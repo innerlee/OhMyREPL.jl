@@ -18,7 +18,7 @@ include("repl.jl")
 include(joinpath("passes", "Passes.jl"))
 
 include("BracketInserter.jl")
-if VERSION > v"0.5-" && VERSION.minor < 6
+if VERSION.minor < 6
     include("ErrorMessages.jl")
 end
 include("prompt.jl")
@@ -114,7 +114,7 @@ function __init__()
         redirect_stderr(f)
 
         Base.LineEdit.refresh_line(s) = (Base.LineEdit.refresh_multi_line(s); OhMyREPL.Prompt.rewrite_with_ANSI(s))
-        if VERSION > v"0.5-" && VERSION.minor < 6
+        if VERSION.minor < 6
             include(joinpath(dirname(@__FILE__), "errormessage_overrides.jl"))
         end
         include(joinpath(dirname(@__FILE__), "output_prompt_overwrite.jl"))

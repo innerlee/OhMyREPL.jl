@@ -71,6 +71,7 @@ function Base.showerror(io::IO, ex, bt; backtrace=true)
             Base.with_output_color(:red, io) do io
                 showerror(IOContext(io, :limit => true), ex)
             end
+        catch
         end
     else
         try

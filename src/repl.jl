@@ -132,6 +132,7 @@ function create_keybindings()
     D["^C"] = (s, data, c) -> begin
         try # raise the debugger if present
             ccall(:jl_raise_debugger, Int, ())
+        catch
         end
         move_input_end(s)
         rewrite_with_ANSI(s)
@@ -308,11 +309,7 @@ function refresh_multi_line(termbuf, terminal, buf, state, promptlength)
     line_pos = buf_pos
 
     # Count the '\n' at the end of the line if the terminal emulator does (specific to DOS cmd prompt)
-    if VERSION > v"0.5.0-"
-        miscountnl = is_windows() ? (isa(Terminals.pipe_reader(terminal), Base.TTY) && !Base.ispty(Terminals.pipe_reader(terminal))) : false
-    else
-        miscountnl = false
-    end
+    miscountnl = is_windows() ? (isa(Terminals.pipe_reader(terminal), Base.TTY) && !Base.ispty(Terminals.pipe_reader(terminal))) : false
     lindent = promptlength
     indent = promptlength # TODO this gets the cursor right but not the text
     # Now go through the buffer line by line

@@ -18,7 +18,7 @@ end
 const BRACKETMATCHER_SETTINGS =
  BracketHighlighterSettings(ANSIToken(bold = :true, underline = :true))
 
-@compat function (matcher::BracketHighlighterSettings)(ansitokens::Vector{ANSIToken}, tokens::Vector{Token}, cursorpos::Int)
+function (matcher::BracketHighlighterSettings)(ansitokens::Vector{ANSIToken}, tokens::Vector{Token}, cursorpos::Int)
     left_bracket_match, right_bracket_match, matched = bracket_match(tokens, cursorpos)
     !matched && return
     ansitokens[left_bracket_match] = matcher.token
