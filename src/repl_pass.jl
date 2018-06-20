@@ -14,7 +14,7 @@ end
 immutable PassHandler
     accum_ansitokens::Vector{ANSIToken}
     ansitokens::Vector{ANSIToken}
-    passes::Vector{Tuple{Compat.UTF8String, Pass}} # This is a stupid type and I should feel stupid
+    passes::Vector{Tuple{String, Pass}} # This is a stupid type and I should feel stupid
 end
 
 PassHandler() = PassHandler(ANSIToken[], ANSIToken[], Tuple{String, Pass}[])

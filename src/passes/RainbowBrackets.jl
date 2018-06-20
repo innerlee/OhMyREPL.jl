@@ -56,7 +56,7 @@ const RAINBOW_TOKENS_256 =
 const RAINBOWBRACKETS_SETTINGS = RainbowBracketsSettings(RAINBOW_TOKENS_256, RAINBOW_TOKENS_16, is_windows() ? RAINBOW_TOKENS_16 : RAINBOW_TOKENS_256)
 
 
-@compat function (rainbow::RainbowBracketsSettings)(ansitokens::Vector{ANSIToken}, tokens::Vector{Token}, cursorpos::Int)
+function (rainbow::RainbowBracketsSettings)(ansitokens::Vector{ANSIToken}, tokens::Vector{Token}, cursorpos::Int)
     p, s, b = 0, 0, 0
     for (i, t) in enumerate(tokens)
         k = kind(t)
